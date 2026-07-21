@@ -381,7 +381,7 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
                     <div class="bg-gray-50 border p-4 rounded-xl flex items-center justify-between">
                         <div class="flex items-center"><i class="fas fa-list-ul text-blue-500 text-xl mr-3"></i> <span class="font-semibold text-gray-700">Pilihan Ganda</span></div>
-                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">30 Soal</span>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">33 Soal</span>
                     </div>
                     <div class="bg-gray-50 border p-4 rounded-xl flex items-center justify-between">
                         <div class="flex items-center"><i class="fas fa-project-diagram text-purple-500 text-xl mr-3"></i> <span class="font-semibold text-gray-700">Menjodohkan</span></div>
@@ -390,10 +390,6 @@
                     <div class="bg-gray-50 border p-4 rounded-xl flex items-center justify-between">
                         <div class="flex items-center"><i class="fas fa-pen text-orange-500 text-xl mr-3"></i> <span class="font-semibold text-gray-700">Isian Singkat</span></div>
                         <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2 py-1 rounded">2 Soal</span>
-                    </div>
-                    <div class="bg-gray-50 border p-4 rounded-xl flex items-center justify-between">
-                        <div class="flex items-center"><i class="fas fa-check-double text-green-500 text-xl mr-3"></i> <span class="font-semibold text-gray-700">PG Kompleks</span></div>
-                        <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">3 Soal</span>
                     </div>
                 </div>
 
@@ -511,7 +507,10 @@
             { q: "Proses peluruhan kulit atau pergantian kerangka luar pada serangga yang sedang tumbuh disebut...", options: ["Ekdisis", "Regenerasi", "Adaptasi", "Mutasi"], answer: 0 },
             { q: "Biji kacang hijau yang disimpan dalam botol tertutup tanpa air tidak akan berkecambah karena...", options: ["Kekurangan cahaya", "Kekurangan oksigen dan air", "Kelebihan karbon dioksida", "Suhu terlalu dingin"], answer: 1 },
             { q: "Menurunnya fungsi organ-organ tubuh secara alamiah terjadi pada masa...", options: ["Dewasa awal", "Dewasa madya", "Lanjut usia (Lansia)", "Pubertas"], answer: 2 },
-            { q: "Pernyataan yang tepat tentang hubungan gen dan pertumbuhan adalah...", options: ["Gen menentukan ukuran maksimal yang dapat dicapai suatu makhluk hidup", "Gen tidak berpengaruh pada hewan, hanya pada manusia", "Pengaruh gen bisa diubah dengan hormon", "Gen hanya bekerja saat masa bayi"], answer: 0 }
+            { q: "Pernyataan yang tepat tentang hubungan gen dan pertumbuhan adalah...", options: ["Gen menentukan ukuran maksimal yang dapat dicapai suatu makhluk hidup", "Gen tidak berpengaruh pada hewan, hanya pada manusia", "Pengaruh gen bisa diubah dengan hormon", "Gen hanya bekerja saat masa bayi"], answer: 0 },
+            { q: "Tahapan embrio pada hewan berturut-turut setelah terbentuknya zigot adalah...", options: ["Morula - Blastula - Gastrula", "Blastula - Morula - Gastrula", "Gastrula - Morula - Blastula", "Morula - Gastrula - Blastula"], answer: 0 },
+            { q: "Pernyataan yang benar mengenai asam absisat pada tumbuhan adalah...", options: ["Merangsang pemanjangan sel", "Berperan dalam pematangan buah", "Membantu tumbuhan bertahan pada kondisi lingkungan yang buruk (misal kekeringan)", "Merangsang pembelahan sel"], answer: 2 },
+            { q: "Bagian otak yang sangat berperan dalam mengatur kelenjar yang menghasilkan hormon pertumbuhan pada manusia adalah...", options: ["Otak besar (Cerebrum)", "Otak kecil (Cerebellum)", "Sumsum tulang belakang", "Hipotalamus dan Kelenjar Pituitari"], answer: 3 }
         ];
 
         // 2. Menjodohkan (5 Pasang)
@@ -529,29 +528,10 @@
             { q: "Metamorfosis yang tidak melalui tahap pupa (kepompong) disebut metamorfosis...", answer: ["tidak sempurna", "hemimetabola"] }
         ];
 
-        // 4. PG Kompleks (3 Soal - Lebih dari 1 jawaban benar)
-        const quizComplex = [
-            { 
-                q: "Manakah dari pernyataan berikut yang merupakan ciri dari pertumbuhan? (Pilih semua yang benar)", 
-                options: ["Bersifat kuantitatif", "Bersifat kualitatif", "Dapat diukur (misal dengan meteran/timbangan)", "Bersifat irreversible (tidak bisa balik)"], 
-                answers: [0, 2, 3] 
-            },
-            { 
-                q: "Berikut ini yang merupakan faktor eksternal (dari luar) yang mempengaruhi pertumbuhan tumbuhan adalah... (Pilih semua yang benar)", 
-                options: ["Air", "Gen", "Cahaya Matahari", "Hormon Auksin"], 
-                answers: [0, 2] 
-            },
-            { 
-                q: "Hewan apa sajakah yang mengalami metamorfosis sempurna (Holometabola)? (Pilih semua yang benar)", 
-                options: ["Lalat", "Belalang", "Kupu-kupu", "Kecoa"], 
-                answers: [0, 2] 
-            }
-        ];
-
         // --- STATE MANAGEMENT ---
         let userAnswers = {};
         let currentQuestionIndex = 0;
-        let totalQuestions = quizPG.length + 1 + quizShort.length + quizComplex.length; // 1 for match section
+        let totalQuestions = quizPG.length + 1 + quizShort.length; // 1 for match section
         let matchState = { selectedLeft: null, selectedRight: null, pairs: [], matchedLines: [] };
         
         // --- FUNGSI NAVIGASI MENU UTAMA ---
@@ -686,17 +666,11 @@
                 titleEl.innerText = "Bagian 2: Menjodohkan";
                 renderMatch(container);
             }
-            else if (currentQuestionIndex > quizPG.length && currentQuestionIndex <= quizPG.length + quizShort.length) {
+            else {
                 // RENDER ISIAN SINGKAT
                 titleEl.innerText = "Bagian 3: Isian Singkat";
                 let shortIdx = currentQuestionIndex - quizPG.length - 1;
                 renderShort(container, shortIdx);
-            }
-            else {
-                // RENDER PG KOMPLEKS
-                titleEl.innerText = "Bagian 4: Pilihan Ganda Kompleks (Jawaban > 1)";
-                let compIdx = currentQuestionIndex - quizPG.length - 1 - quizShort.length;
-                renderComplex(container, compIdx);
             }
 
             updateQuizNavButtons();
@@ -847,67 +821,6 @@
             userAnswers[`short_${idx}`] = val.trim();
         }
 
-        function renderComplex(container, idx) {
-            const qData = quizComplex[idx];
-            // Get saved answers array or initialize empty
-            let savedAns = userAnswers[`comp_${idx}`] || []; 
-            
-            let html = `
-                <div class="mb-4">
-                    <h4 class="text-lg font-semibold text-gray-800 mb-2">${idx + 1}. ${qData.q}</h4>
-                    <p class="text-sm text-red-500 mb-4 font-medium">*Pilih semua jawaban yang menurutmu benar</p>
-                    <div class="space-y-3">
-            `;
-            
-            qData.options.forEach((opt, optIdx) => {
-                const isChecked = savedAns.includes(optIdx);
-                const bgClass = isChecked ? 'bg-blue-50 border-blue-500' : 'bg-gray-50 border-gray-200 hover:bg-gray-100';
-                
-                html += `
-                    <label class="flex items-center p-4 border rounded-lg cursor-pointer transition-colors ${bgClass}" onclick="toggleComplex(${idx}, ${optIdx}, this)">
-                        <input type="checkbox" class="hidden" ${isChecked ? 'checked' : ''}>
-                        <div class="w-6 h-6 rounded flex-shrink-0 mr-4 border-2 flex items-center justify-center custom-check ${isChecked ? 'bg-blue-600 border-blue-600' : 'border-gray-300'} pointer-events-none">
-                            ${isChecked ? '<i class="fas fa-check text-white text-xs"></i>' : ''}
-                        </div>
-                        <span class="text-gray-700 pointer-events-none">${opt}</span>
-                    </label>
-                `;
-            });
-            
-            html += `</div></div>`;
-            container.innerHTML = html;
-        }
-
-        function toggleComplex(qIdx, optIdx, labelElement) {
-            let currentAns = userAnswers[`comp_${qIdx}`] || [];
-            const index = currentAns.indexOf(optIdx);
-            
-            if (index > -1) {
-                currentAns.splice(index, 1); // Remove
-            } else {
-                currentAns.push(optIdx); // Add
-            }
-            userAnswers[`comp_${qIdx}`] = currentAns;
-
-            // Update UI
-            const isChecked = currentAns.includes(optIdx);
-            const box = labelElement.querySelector('.custom-check');
-            
-            if(isChecked) {
-                labelElement.classList.remove('bg-gray-50', 'border-gray-200');
-                labelElement.classList.add('bg-blue-50', 'border-blue-500');
-                box.classList.remove('border-gray-300');
-                box.classList.add('bg-blue-600', 'border-blue-600');
-                box.innerHTML = '<i class="fas fa-check text-white text-xs"></i>';
-            } else {
-                labelElement.classList.remove('bg-blue-50', 'border-blue-500');
-                labelElement.classList.add('bg-gray-50', 'border-gray-200');
-                box.classList.remove('bg-blue-600', 'border-blue-600');
-                box.classList.add('border-gray-300');
-                box.innerHTML = '';
-            }
-        }
-
         function navQuiz(direction) {
             let newIndex = currentQuestionIndex + direction;
             if (newIndex >= 0 && newIndex < totalQuestions) {
@@ -942,10 +855,10 @@
 
         function calculateScore() {
             let correctCount = 0;
-            let totalPoints = quizPG.length + quizMatch.length + quizShort.length + quizComplex.length;
+            let totalPoints = quizPG.length + quizMatch.length + quizShort.length;
             evaluationData.details = [];
 
-            // 1. Evaluate PG (30)
+            // 1. Evaluate PG
             quizPG.forEach((q, idx) => {
                 let uAns = userAnswers[`pg_${idx}`];
                 let isCorrect = uAns === q.answer;
@@ -983,28 +896,6 @@
                 evaluationData.details.push({
                     type: 'short', num: quizPG.length + 1 + idx, q: q.q, correct: isCorrect,
                     userAnsText: uAns || 'Tidak dijawab', correctAnsText: q.answer[0]
-                });
-            });
-
-            // 4. Evaluate Complex (3)
-            quizComplex.forEach((q, idx) => {
-                let uAns = userAnswers[`comp_${idx}`] || [];
-                // Sort both arrays to compare
-                let uAnsSorted = [...uAns].sort();
-                let correctSorted = [...q.answers].sort();
-                
-                let isCorrect = uAnsSorted.length === correctSorted.length && 
-                                uAnsSorted.every((val, index) => val === correctSorted[index]);
-                
-                if(isCorrect) correctCount++;
-                
-                let uAnsTextArr = uAns.map(i => q.options[i]);
-                let cAnsTextArr = q.answers.map(i => q.options[i]);
-
-                evaluationData.details.push({
-                    type: 'complex', num: quizPG.length + 1 + quizShort.length + idx, q: q.q, correct: isCorrect,
-                    userAnsText: uAnsTextArr.length > 0 ? uAnsTextArr.join('<br>') : 'Tidak dijawab', 
-                    correctAnsText: cAnsTextArr.join('<br>')
                 });
             });
 

@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media Pembelajaran: Pertumbuhan & Perkembangan</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f0fdf4; color: #1f2937; }
+        .menu-btn { transition: all 0.2s ease-in-out; }
+        .menu-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        .menu-btn.active { background-color: #166534; color: white; border-color: #166534; }
+        .content-section { display: none; animation: fadeIn 0.3s ease-in-out; }
+        .content-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #e5e7eb; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb { background: #16a34a; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #15803d; }
+
+        /* Match Line styling for Matching Quiz */
+        .match-item { cursor: pointer; transition: background-color 0.2s; border: 2px solid transparent; }
+        .match-item.selected { border-color: #3b82f6; background-color: #eff6ff; }
+        .match-item.matched { background-color: #dcfce3; border-color: #22c55e; cursor: default; }
+        .match-item.wrong { background-color: #fee2e2; border-color: #ef4444; }
+        
+        .quiz-container { max-height: 70vh; overflow-y: auto; padding-right: 1rem; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <header class="bg-green-700 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4 md:py-6 flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center gap-3 mb-4 md:mb-0">
+                <div class="bg-white p-2 rounded-full text-green-700">
+                    <i class="fas fa-leaf text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-xl md:text-2xl font-bold tracking-tight">Biologi Kelas 9</h1>
+                    <p class="text-green-100 text-sm font-medium">Pertumbuhan & Perkembangan Makhluk Hidup</p>
+                </div>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <nav class="flex flex-wrap justify-center gap-2 md:gap-4 w-full md:w-auto">
+                <button onclick="showSection('tujuan')" id="btn-tujuan" class="menu-btn active px-4 py-2 bg-green-600 hover:bg-green-800 rounded-lg text-sm md:text-base font-semibold border border-green-500 whitespace-nowrap"><i class="fas fa-bullseye mr-2"></i>Tujuan</button>
+                <button onclick="showSection('materi')" id="btn-materi" class="menu-btn px-4 py-2 bg-white text-green-800 hover:bg-green-50 rounded-lg text-sm md:text-base font-semibold border border-green-200 whitespace-nowrap"><i class="fas fa-book-open mr-2"></i>Materi</button>
+                <button onclick="showSection('rangkuman')" id="btn-rangkuman" class="menu-btn px-4 py-2 bg-white text-green-800 hover:bg-green-50 rounded-lg text-sm md:text-base font-semibold border border-green-200 whitespace-nowrap"><i class="fas fa-list-alt mr-2"></i>Rangkuman</button>
+                <button onclick="showSection('aktivitas')" id="btn-aktivitas" class="menu-btn px-4 py-2 bg-white text-green-800 hover:bg-green-50 rounded-lg text-sm md:text-base font-semibold border border-green-200 whitespace-nowrap"><i class="fas fa-flask mr-2"></i>Aktivitas</button>
+                <button onclick="showSection('kuis')" id="btn-kuis" class="menu-btn px-4 py-2 bg-white text-green-800 hover:bg-green-50 rounded-lg text-sm md:text-base font-semibold border border-green-200 whitespace-nowrap"><i class="fas fa-question-circle mr-2"></i>Kuis</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="flex-grow container mx-auto px-4 py-8">
+        
+        <!-- SECTION: TUJUAN PEMBELAJARAN -->
+        <section id="tujuan" class="content-section active max-w-4xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-green-100">
+            <h2 class="text-3xl font-bold text-green-800 mb-6 flex items-center border-b pb-4"><i class="fas fa-bullseye text-green-600 mr-3"></i>Tujuan Pembelajaran</h2>
+            <div class="bg-green-50 border-l-4 border-green-500 p-6 rounded-r-lg">
+                <p class="text-lg text-gray-700 mb-4 font-medium">Setelah mempelajari materi ini, siswa diharapkan mampu:</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start">
+                        <span class="bg-green-200 text-green-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-0.5"><i class="fas fa-check text-xs"></i></span>
+                        <span class="text-gray-700">Mendeskripsikan pengertian pertumbuhan dan perkembangan.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-green-200 text-green-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-0.5"><i class="fas fa-check text-xs"></i></span>
+                        <span class="text-gray-700">Membedakan proses pertumbuhan dan perkembangan pada makhluk hidup.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-green-200 text-green-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-0.5"><i class="fas fa-check text-xs"></i></span>
+                        <span class="text-gray-700">Menganalisis faktor-faktor internal dan eksternal yang memengaruhi pertumbuhan dan perkembangan tumbuhan dan hewan.</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-green-200 text-green-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-0.5"><i class="fas fa-check text-xs"></i></span>
+                        <span class="text-gray-700">Menjelaskan tahapan metamorfosis pada hewan (sempurna dan tidak sempurna).</span>
+                    </li>
+                    <li class="flex items-start">
+                        <span class="bg-green-200 text-green-800 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0 mt-0.5"><i class="fas fa-check text-xs"></i></span>
+                        <span class="text-gray-700">Mengidentifikasi tahapan pertumbuhan dan perkembangan pada manusia.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="mt-8 flex justify-end">
+                <button onclick="showSection('materi')" class="bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition-colors flex items-center">
+                    Mulai Belajar <i class="fas fa-arrow-right ml-2"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION: MATERI -->
+        <section id="materi" class="content-section max-w-5xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Sidebar Materi -->
+                <div class="md:col-span-1 bg-white rounded-xl shadow-sm border border-gray-200 p-4 h-fit sticky top-24">
+                    <h3 class="font-bold text-lg text-gray-800 mb-4 border-b pb-2">Daftar Isi</h3>
+                    <ul class="space-y-2" id="materi-nav">
+                        <li><button onclick="showMateriPage('materi-1')" class="w-full text-left px-3 py-2 rounded bg-green-100 text-green-800 font-medium text-sm transition-colors materi-nav-btn">1. Pengertian</button></li>
+                        <li><button onclick="showMateriPage('materi-2')" class="w-full text-left px-3 py-2 rounded hover:bg-gray-100 text-gray-600 font-medium text-sm transition-colors materi-nav-btn">2. Faktor Pengaruh</button></li>
+                        <li><button onclick="showMateriPage('materi-3')" class="w-full text-left px-3 py-2 rounded hover:bg-gray-100 text-gray-600 font-medium text-sm transition-colors materi-nav-btn">3. Pada Tumbuhan</button></li>
+                        <li><button onclick="showMateriPage('materi-4')" class="w-full text-left px-3 py-2 rounded hover:bg-gray-100 text-gray-600 font-medium text-sm transition-colors materi-nav-btn">4. Pada Hewan</button></li>
+                        <li><button onclick="showMateriPage('materi-5')" class="w-full text-left px-3 py-2 rounded hover:bg-gray-100 text-gray-600 font-medium text-sm transition-colors materi-nav-btn">5. Pada Manusia</button></li>
+                    </ul>
+                </div>
+
+                <!-- Konten Materi -->
+                <div class="md:col-span-3 bg-white rounded-xl shadow-sm border border-gray-200 p-6 md:p-8 min-h-[60vh]">
+                    
+                    <!-- Materi 1 -->
+                    <div id="materi-1" class="materi-page">
+                        <h2 class="text-2xl font-bold text-green-800 mb-4">Pengertian Pertumbuhan dan Perkembangan</h2>
+                        <div class="prose max-w-none text-gray-700">
+                            <p class="mb-4">Walaupun sering digunakan bersamaan, pertumbuhan dan perkembangan adalah dua proses yang berbeda namun saling berkaitan.</p>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                <div class="bg-blue-50 p-5 rounded-lg border border-blue-100">
+                                    <h3 class="text-xl font-bold text-blue-800 mb-2 flex items-center"><i class="fas fa-chart-line mr-2"></i>Pertumbuhan</h3>
+                                    <p>Proses bertambahnya ukuran (volume, massa, tinggi, atau panjang) makhluk hidup.</p>
+                                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                                        <li>Bersifat <strong>Kuantitatif</strong> (bisa diukur dengan angka).</li>
+                                        <li>Bersifat <strong>Irreversible</strong> (tidak dapat kembali ke bentuk semula).</li>
+                                        <li>Contoh: Bertambahnya tinggi batang pohon, bertambahnya berat badan.</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="bg-purple-50 p-5 rounded-lg border border-purple-100">
+                                    <h3 class="text-xl font-bold text-purple-800 mb-2 flex items-center"><i class="fas fa-brain mr-2"></i>Perkembangan</h3>
+                                    <p>Proses menuju kedewasaan atau pematangan fungsi organ makhluk hidup.</p>
+                                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                                        <li>Bersifat <strong>Kualitatif</strong> (tidak bisa diukur dengan angka, dilihat dari fungsinya).</li>
+                                        <li>Contoh: Bunga yang mekar siap untuk reproduksi, bayi yang mulai bisa berjalan dan berbicara.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materi 2 -->
+                    <div id="materi-2" class="materi-page hidden">
+                        <h2 class="text-2xl font-bold text-green-800 mb-4">Faktor yang Memengaruhi</h2>
+                        <p class="text-gray-700 mb-4">Pertumbuhan dan perkembangan dipengaruhi oleh dua faktor utama:</p>
+                        
+                        <div class="space-y-6">
+                            <div class="border-l-4 border-orange-500 pl-4">
+                                <h3 class="text-lg font-bold text-gray-800">1. Faktor Internal (Dari dalam)</h3>
+                                <ul class="mt-2 space-y-2 text-gray-700">
+                                    <li><strong>Gen:</strong> Materi pembawa sifat yang diturunkan dari induk. Gen menentukan bentuk tubuh, warna kulit, ketahanan penyakit, dll.</li>
+                                    <li><strong>Hormon:</strong> Zat kimia pengatur tubuh.
+                                        <ul class="list-circle pl-5 mt-1 text-sm">
+                                            <li>Pada tumbuhan: Auksin (pemanjangan sel), Giberelin (perkecambahan), Sitokinin (pembelahan sel).</li>
+                                            <li>Pada hewan/manusia: Tiroksin (metabolisme), Testosteron/Estrogen (kelamin sekunder), Somatotropin (pertumbuhan).</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            
+                            <div class="border-l-4 border-blue-500 pl-4">
+                                <h3 class="text-lg font-bold text-gray-800">2. Faktor Eksternal (Dari lingkungan)</h3>
+                                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-3">
+                                    <div class="bg-gray-50 p-3 rounded text-center border">
+                                        <i class="fas fa-utensils text-2xl text-blue-500 mb-2"></i>
+                                        <p class="font-semibold text-sm">Nutrisi/Makanan</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-3 rounded text-center border">
+                                        <i class="fas fa-sun text-2xl text-yellow-500 mb-2"></i>
+                                        <p class="font-semibold text-sm">Cahaya Matahari</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-3 rounded text-center border">
+                                        <i class="fas fa-tint text-2xl text-blue-300 mb-2"></i>
+                                        <p class="font-semibold text-sm">Air & Kelembapan</p>
+                                    </div>
+                                    <div class="bg-gray-50 p-3 rounded text-center border">
+                                        <i class="fas fa-thermometer-half text-2xl text-red-500 mb-2"></i>
+                                        <p class="font-semibold text-sm">Suhu</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materi 3 -->
+                    <div id="materi-3" class="materi-page hidden">
+                        <h2 class="text-2xl font-bold text-green-800 mb-4">Pada Tumbuhan</h2>
+                        
+                        <h3 class="text-xl font-semibold text-gray-800 mt-4 mb-2 border-b pb-1">1. Perkecambahan</h3>
+                        <p class="text-gray-700 mb-2">Berakhirnya masa dormansi biji. Ditandai dengan masuknya air ke dalam biji (imbibisi) yang mengaktifkan hormon giberelin. Tipe perkecambahan:</p>
+                        <ul class="list-disc pl-5 mb-4 text-gray-700">
+                            <li><strong>Epigeal:</strong> Kotiledon terangkat ke atas permukaan tanah (contoh: kacang hijau).</li>
+                            <li><strong>Hipogeal:</strong> Kotiledon tertinggal di dalam tanah (contoh: jagung).</li>
+                        </ul>
+
+                        <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2 border-b pb-1">2. Pertumbuhan Primer</h3>
+                        <p class="text-gray-700 mb-4">Terjadi karena aktivitas meristem apikal (ujung akar & ujung batang). Menyebabkan tumbuhan bertambah <strong>tinggi/panjang</strong>.</p>
+
+                        <h3 class="text-xl font-semibold text-gray-800 mt-6 mb-2 border-b pb-1">3. Pertumbuhan Sekunder</h3>
+                        <p class="text-gray-700 mb-4">Terjadi karena aktivitas kambium (hanya pada tumbuhan dikotil dan Gymnospermae). Menyebabkan batang bertambah <strong>besar/lebar</strong> (membentuk lingkaran tahun).</p>
+                    </div>
+
+                    <!-- Materi 4 -->
+                    <div id="materi-4" class="materi-page hidden">
+                        <h2 class="text-2xl font-bold text-green-800 mb-4">Pada Hewan</h2>
+                        <p class="text-gray-700 mb-4">Fase pertumbuhan hewan terbagi menjadi fase embrionik (sebelum lahir/menetas) dan pasca-embrionik (setelah lahir/menetas). Pada fase pasca-embrionik, beberapa hewan mengalami <strong>Metamorfosis</strong>.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6">
+                            <div class="border border-gray-200 rounded-lg p-5">
+                                <h3 class="font-bold text-lg text-red-600 mb-3 text-center">Metamorfosis Sempurna (Holometabola)</h3>
+                                <p class="text-sm text-gray-600 mb-3">Bentuk hewan muda sangat berbeda dengan bentuk dewasanya.</p>
+                                <div class="flex justify-center items-center space-x-2 text-sm font-medium bg-red-50 p-3 rounded">
+                                    <span>Telur</span> <i class="fas fa-arrow-right text-gray-400"></i>
+                                    <span>Larva</span> <i class="fas fa-arrow-right text-gray-400"></i>
+                                    <span>Pupa</span> <i class="fas fa-arrow-right text-gray-400"></i>
+                                    <span>Imago</span>
+                                </div>
+                                <p class="text-sm mt-3"><strong>Contoh:</strong> Kupu-kupu, nyamuk, lalat, katak (tanpa pupa, tapi bentuknya sangat beda).</p>
+                            </div>
+                            
+                            <div class="border border-gray-200 rounded-lg p-5">
+                                <h3 class="font-bold text-lg text-yellow-600 mb-3 text-center">Metamorfosis Tidak Sempurna (Hemimetabola)</h3>
+                                <p class="text-sm text-gray-600 mb-3">Bentuk hewan muda mirip dengan dewasanya, hanya ukurannya berbeda dan organ belum lengkap.</p>
+                                <div class="flex justify-center items-center space-x-2 text-sm font-medium bg-yellow-50 p-3 rounded">
+                                    <span>Telur</span> <i class="fas fa-arrow-right text-gray-400"></i>
+                                    <span>Nimfa</span> <i class="fas fa-arrow-right text-gray-400"></i>
+                                    <span>Imago (Dewasa)</span>
+                                </div>
+                                <p class="text-sm mt-3"><strong>Contoh:</strong> Belalang, kecoa, jangkrik, capung.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Materi 5 -->
+                    <div id="materi-5" class="materi-page hidden">
+                        <h2 class="text-2xl font-bold text-green-800 mb-4">Pada Manusia</h2>
+                        <p class="text-gray-700 mb-4">Pertumbuhan dan perkembangan manusia dibagi menjadi beberapa tahapan kehidupan:</p>
+                        
+                        <div class="relative border-l-2 border-green-300 ml-4 pl-6 space-y-6">
+                            <div>
+                                <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] border-2 border-white"></div>
+                                <h4 class="font-bold text-gray-800">1. Balita (0-5 tahun)</h4>
+                                <p class="text-sm text-gray-600">Pertumbuhan fisik sangat pesat, perkembangan motorik (merangkak, berjalan) dan bahasa dimulai.</p>
+                            </div>
+                            <div>
+                                <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] border-2 border-white"></div>
+                                <h4 class="font-bold text-gray-800">2. Anak-anak (6-10 tahun)</h4>
+                                <p class="text-sm text-gray-600">Pertumbuhan fisik stabil, perkembangan kognitif dan sosial (bermain, belajar di sekolah) meningkat.</p>
+                            </div>
+                            <div>
+                                <div class="absolute w-4 h-4 bg-red-500 rounded-full -left-[9px] border-2 border-white shadow-[0_0_10px_rgba(239,68,68,0.5)]"></div>
+                                <h4 class="font-bold text-red-700">3. Remaja / Pubertas (11-18 tahun)</h4>
+                                <p class="text-sm text-gray-700 font-medium">Masa transisi. Ditandai dengan aktifnya hormon reproduksi. Terjadi perubahan fisik (ciri kelamin sekunder) dan pematangan fungsi organ reproduksi.</p>
+                            </div>
+                            <div>
+                                <div class="absolute w-4 h-4 bg-green-500 rounded-full -left-[9px] border-2 border-white"></div>
+                                <h4 class="font-bold text-gray-800">4. Dewasa (19-50 tahun)</h4>
+                                <p class="text-sm text-gray-600">Pertumbuhan fisik berhenti (tinggi maksimal). Puncak kematangan fisik dan psikologis.</p>
+                            </div>
+                            <div>
+                                <div class="absolute w-4 h-4 bg-gray-500 rounded-full -left-[9px] border-2 border-white"></div>
+                                <h4 class="font-bold text-gray-800">5. Lansia (> 50 tahun)</h4>
+                                <p class="text-sm text-gray-600">Penurunan fungsi organ tubuh, pada wanita mengalami menopause.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Navigasi Bawah Materi -->
+                    <div class="mt-8 flex justify-between border-t pt-4">
+                        <button id="btn-materi-prev" onclick="navMateri(-1)" class="px-4 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 rounded-lg transition-colors invisible"><i class="fas fa-chevron-left mr-2"></i>Sebelumnya</button>
+                        <button id="btn-materi-next" onclick="navMateri(1)" class="px-4 py-2 bg-green-600 hover:bg-green-700 text-white rounded-lg transition-colors">Selanjutnya<i class="fas fa-chevron-right ml-2"></i></button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: RANGKUMAN -->
+        <section id="rangkuman" class="content-section max-w-4xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-green-100">
+            <h2 class="text-3xl font-bold text-green-800 mb-6 flex items-center border-b pb-4"><i class="fas fa-list-alt text-green-600 mr-3"></i>Rangkuman</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-yellow-50 p-5 rounded-xl border border-yellow-200 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-balance-scale text-6xl"></i></div>
+                    <h3 class="font-bold text-lg text-yellow-800 mb-3 z-10 relative">Konsep Dasar</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700 z-10 relative">
+                        <li><strong>Pertumbuhan:</strong> Tambah ukuran, kuantitatif, irreversible.</li>
+                        <li><strong>Perkembangan:</strong> Menuju dewasa, kualitatif, fungsi sel/organ spesifik.</li>
+                        <li><strong>Faktor Internal:</strong> Gen dan Hormon.</li>
+                        <li><strong>Faktor Eksternal:</strong> Nutrisi, Cahaya, Suhu, Air.</li>
+                    </ul>
+                </div>
+                
+                <div class="bg-green-50 p-5 rounded-xl border border-green-200 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-seedling text-6xl"></i></div>
+                    <h3 class="font-bold text-lg text-green-800 mb-3 z-10 relative">Pada Tumbuhan</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700 z-10 relative">
+                        <li>Dimulai dari <strong>Perkecambahan</strong> (Epigeal & Hipogeal).</li>
+                        <li><strong>Pertumbuhan Primer:</strong> Ujung akar & batang (memanjang).</li>
+                        <li><strong>Pertumbuhan Sekunder:</strong> Kambium (membesar, membentuk lingkaran tahun).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-blue-50 p-5 rounded-xl border border-blue-200 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-bug text-6xl"></i></div>
+                    <h3 class="font-bold text-lg text-blue-800 mb-3 z-10 relative">Pada Hewan</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700 z-10 relative">
+                        <li>Mengalami masa embrionik dan pasca-embrionik.</li>
+                        <li><strong>Metamorfosis Sempurna:</strong> Telur &rarr; Larva &rarr; Pupa &rarr; Imago (Contoh: Kupu-kupu).</li>
+                        <li><strong>Metamorfosis Tidak Sempurna:</strong> Telur &rarr; Nimfa &rarr; Imago (Contoh: Belalang).</li>
+                    </ul>
+                </div>
+
+                <div class="bg-pink-50 p-5 rounded-xl border border-pink-200 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 p-4 opacity-10"><i class="fas fa-child text-6xl"></i></div>
+                    <h3 class="font-bold text-lg text-pink-800 mb-3 z-10 relative">Pada Manusia</h3>
+                    <ul class="list-disc pl-5 space-y-2 text-sm text-gray-700 z-10 relative">
+                        <li>Tahapan: Balita &rarr; Anak-anak &rarr; Remaja &rarr; Dewasa &rarr; Lansia.</li>
+                        <li><strong>Masa Pubertas (Remaja):</strong> Ditandai dengan aktifnya hormon reproduksi dan munculnya ciri-ciri kelamin sekunder.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="mt-8 text-center bg-gray-50 p-4 rounded-lg border border-gray-200">
+                <p class="text-gray-700 font-medium">Sudah paham dengan materinya? Yuk uji pemahamanmu!</p>
+                <button onclick="showSection('kuis')" class="mt-3 bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-6 rounded-lg transition-colors">
+                    Menuju Kuis <i class="fas fa-play ml-2"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- SECTION: AKTIVITAS -->
+        <section id="aktivitas" class="content-section max-w-4xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-green-100">
+            <h2 class="text-3xl font-bold text-green-800 mb-6 flex items-center border-b pb-4"><i class="fas fa-flask text-green-600 mr-3"></i>Aktivitas Siswa</h2>
+            
+            <div class="bg-white border-2 border-dashed border-green-300 rounded-xl p-6">
+                <div class="flex items-start gap-4">
+                    <div class="bg-green-100 p-3 rounded-full text-green-700 text-2xl">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Eksperimen Mandiri: Pengaruh Cahaya terhadap Pertumbuhan</h3>
+                        <p class="text-gray-600 mb-4">Mari kita amati bagaimana cahaya memengaruhi pertumbuhan kecambah kacang hijau.</p>
+                        
+                        <h4 class="font-bold text-gray-800 mb-1">Alat & Bahan:</h4>
+                        <ul class="list-disc pl-5 text-sm text-gray-600 mb-4 grid grid-cols-2 gap-1">
+                            <li>2 buah gelas plastik (bekas air mineral)</li>
+                            <li>Kapas secukupnya</li>
+                            <li>10 butir biji kacang hijau</li>
+                            <li>Air secukupnya</li>
+                            <li>Kardus/kotak tertutup</li>
+                        </ul>
+
+                        <h4 class="font-bold text-gray-800 mb-1">Langkah Kerja:</h4>
+                        <ol class="list-decimal pl-5 text-sm text-gray-600 space-y-2 mb-4">
+                            <li>Rendam biji kacang hijau selama 2-3 jam.</li>
+                            <li>Basahi kapas dengan air, lalu masukkan ke dasar kedua gelas plastik.</li>
+                            <li>Letakkan 5 butir biji kacang hijau di masing-masing gelas. Beri label Gelas A dan Gelas B.</li>
+                            <li>Letakkan <strong>Gelas A di tempat terang</strong> (terkena sinar matahari tidak langsung).</li>
+                            <li>Letakkan <strong>Gelas B di tempat gelap</strong> (di dalam kardus tertutup).</li>
+                            <li>Siram/percikkan air sedikit setiap hari agar kapas tetap lembap.</li>
+                            <li>Amati pertumbuhannya selama 5-7 hari. Catat tinggi tanaman, warna daun, dan kondisi batang di buku tugasmu!</li>
+                        </ol>
+
+                        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded mt-4">
+                            <p class="text-sm font-semibold text-yellow-800"><i class="fas fa-lightbulb mr-2"></i>Pertanyaan Diskusi:</p>
+                            <p class="text-sm text-gray-700 italic">Bandingkan tanaman di Gelas A dan Gelas B. Manakah yang tumbuh lebih tinggi? Manakah yang daunnya lebih hijau? Mengapa hal itu bisa terjadi?</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION: KUIS -->
+        <section id="kuis" class="content-section max-w-4xl mx-auto bg-white rounded-2xl shadow-sm p-6 md:p-8 border border-green-100">
+            
+            <!-- Halaman Utama Kuis -->
+            <div id="quiz-home" class="text-center">
+                <h2 class="text-3xl font-bold text-green-800 mb-4">Uji Pemahamanmu!</h2>
+                <p class="text-gray-600 mb-8 max-w-2xl mx-auto">Kuis ini terdiri dari beberapa jenis soal untuk menguji pemahamanmu secara menyeluruh tentang materi Pertumbuhan dan Perkembangan.</p>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-8">
+                    <div class="bg-gray-50 border p-4 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center"><i class="fas fa-list-ul text-blue-500 text-xl mr-3"></i> <span class="font-semibold text-gray-700">Pilihan Ganda</span></div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-bold px-2 py-1 rounded">30 Soal</span>
+                    </div>
+                    <div class="bg-gray-50 border p-4 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center"><i class="fas fa-project-diagram text-purple-500 text-xl mr-3"></i> <span class="font-semibold text-gray-700">Menjodohkan</span></div>
+                        <span class="bg-purple-100 text-purple-800 text-xs font-bold px-2 py-1 rounded">5 Soal</span>
+                    </div>
+                    <div class="bg-gray-50 border p-4 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center"><i class="fas fa-pen text-orange-500 text-xl mr-3"></i> <span class="font-semibold text-gray-700">Isian Singkat</span></div>
+                        <span class="bg-orange-100 text-orange-800 text-xs font-bold px-2 py-1 rounded">2 Soal</span>
+                    </div>
+                    <div class="bg-gray-50 border p-4 rounded-xl flex items-center justify-between">
+                        <div class="flex items-center"><i class="fas fa-check-double text-green-500 text-xl mr-3"></i> <span class="font-semibold text-gray-700">PG Kompleks</span></div>
+                        <span class="bg-green-100 text-green-800 text-xs font-bold px-2 py-1 rounded">3 Soal</span>
+                    </div>
+                </div>
+
+                <button onclick="startQuiz()" class="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-10 rounded-full text-lg shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    Mulai Kuis Sekarang
+                </button>
+            </div>
+
+            <!-- Kontainer Area Kuis (Aktif saat kuis berjalan) -->
+            <div id="quiz-area" class="hidden">
+                <div class="flex justify-between items-center mb-6 border-b pb-4">
+                    <h3 id="quiz-type-title" class="text-xl font-bold text-gray-800">Bagian 1: Pilihan Ganda</h3>
+                    <div class="bg-gray-100 px-3 py-1 rounded-full text-sm font-semibold text-gray-600">
+                        Soal <span id="current-question-num">1</span> / <span id="total-questions-num">40</span>
+                    </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="w-full bg-gray-200 rounded-full h-2.5 mb-6">
+                  <div id="quiz-progress" class="bg-green-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+
+                <!-- Kontainer Soal -->
+                <div id="question-container" class="quiz-container mb-8 min-h-[300px]">
+                    <!-- Konten soal akan di-render disini via JS -->
+                </div>
+
+                <!-- Navigasi Kuis -->
+                <div class="flex justify-between items-center mt-6">
+                    <button id="btn-quiz-prev" onclick="navQuiz(-1)" class="px-5 py-2 bg-gray-200 hover:bg-gray-300 text-gray-700 font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed">Kembali</button>
+                    <button id="btn-quiz-next" onclick="navQuiz(1)" class="px-5 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors">Lanjut</button>
+                    <button id="btn-quiz-submit" onclick="finishQuiz()" class="hidden px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg transition-colors shadow-md">Selesai & Cek Nilai</button>
+                </div>
+            </div>
+
+            <!-- Halaman Hasil Kuis -->
+            <div id="quiz-result" class="hidden text-center py-8">
+                <div class="inline-block p-4 rounded-full bg-green-100 text-green-600 text-6xl mb-4">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 mb-2">Kuis Selesai!</h2>
+                <p class="text-gray-600 mb-6">Berikut adalah hasil evaluasi belajarmu.</p>
+                
+                <div class="bg-white border-2 border-gray-100 shadow-md rounded-2xl p-8 max-w-md mx-auto mb-8 relative overflow-hidden">
+                    <div class="absolute top-0 left-0 w-full h-2 bg-green-500"></div>
+                    <div class="text-6xl font-black text-gray-800 mb-2" id="score-display">100</div>
+                    <p class="text-gray-500 font-medium mb-4">Skor Akhir</p>
+                    
+                    <div class="grid grid-cols-2 gap-4 text-sm mt-6 border-t pt-4">
+                        <div class="text-center">
+                            <div class="text-green-500 font-bold text-lg" id="correct-display">35</div>
+                            <div class="text-gray-500">Benar</div>
+                        </div>
+                        <div class="text-center border-l">
+                            <div class="text-red-500 font-bold text-lg" id="wrong-display">5</div>
+                            <div class="text-gray-500">Salah/Kosong</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-x-4">
+                    <button onclick="reviewQuiz()" class="px-6 py-2 bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold rounded-lg transition-colors">Lihat Pembahasan</button>
+                    <button onclick="resetQuiz()" class="px-6 py-2 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg transition-colors">Ulangi Kuis</button>
+                </div>
+            </div>
+
+            <!-- Halaman Review / Pembahasan -->
+            <div id="quiz-review" class="hidden">
+                 <div class="flex justify-between items-center mb-6 border-b pb-4">
+                    <h3 class="text-xl font-bold text-gray-800"><i class="fas fa-clipboard-check text-green-600 mr-2"></i>Pembahasan Kuis</h3>
+                    <button onclick="closeReview()" class="px-4 py-1 bg-gray-200 hover:bg-gray-300 text-sm font-semibold rounded">Tutup</button>
+                </div>
+                <div id="review-container" class="space-y-6 max-h-[60vh] overflow-y-auto pr-2">
+                    <!-- Konten review diisi JS -->
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="bg-gray-800 text-gray-400 text-center py-4 mt-8">
+        <p class="text-sm">&copy; 2026 Media Pembelajaran Biologi Kelas 9. Dibuat dengan <i class="fas fa-heart text-red-500 mx-1"></i> untuk Pendidikan.</p>
+    </footer>
+
+    <script>
+        // --- DATA KUIS ---
+        // 1. Pilihan Ganda (30 Soal)
+        const quizPG = [
+            { q: "Proses pertambahan volume dan jumlah sel yang bersifat irreversible disebut...", options: ["Perkembangan", "Pertumbuhan", "Metabolisme", "Reproduksi"], answer: 1 },
+            { q: "Berikut ini yang merupakan ciri dari perkembangan adalah...", options: ["Dapat diukur dengan mistar", "Bersifat kuantitatif", "Terjadi perubahan bentuk dan pematangan fungsi organ", "Hanya terjadi pada masa bayi"], answer: 2 },
+            { q: "Hormon yang berperan dalam pemanjangan sel pada tumbuhan ujung koleoptil adalah...", options: ["Sitokinin", "Giberelin", "Auksin", "Kalin"], answer: 2 },
+            { q: "Faktor internal yang mempengaruhi pertumbuhan dan perkembangan adalah...", options: ["Cahaya dan suhu", "Gen dan hormon", "Air dan kelembapan", "Nutrisi dan oksigen"], answer: 1 },
+            { q: "Perkecambahan dimana kotiledon terangkat ke atas permukaan tanah disebut...", options: ["Hipogeal", "Epigeal", "Endosperma", "Radikula"], answer: 1 },
+            { q: "Contoh tumbuhan yang mengalami perkecambahan hipogeal adalah...", options: ["Kacang hijau dan kedelai", "Jagung dan kelapa", "Kacang tanah dan mangga", "Rambutan dan pepaya"], answer: 1 },
+            { q: "Pertumbuhan yang menyebabkan batang pohon beringin membesar adalah akibat dari aktivitas...", options: ["Meristem apikal", "Kambium", "Meristem interkalar", "Jaringan epidermis"], answer: 1 },
+            { q: "Urutan tahapan metamorfosis sempurna yang benar adalah...", options: ["Telur - Nimfa - Pupa - Imago", "Telur - Larva - Pupa - Imago", "Telur - Pupa - Larva - Imago", "Telur - Nimfa - Imago"], answer: 1 },
+            { q: "Hewan berikut yang mengalami metamorfosis tidak sempurna (hemimetabola) adalah...", options: ["Kupu-kupu", "Katak", "Nyamuk", "Belalang"], answer: 3 },
+            { q: "Pada metamorfosis katak, alat pernapasan berudu adalah...", options: ["Paru-paru", "Kulit", "Insang", "Trakea"], answer: 2 },
+            { q: "Masa pubertas pada manusia ditandai dengan mulai aktifnya...", options: ["Hormon pertumbuhan (Somatotropin)", "Hormon pencernaan", "Hormon reproduksi", "Hormon insulin"], answer: 2 },
+            { q: "Ciri perkembangan fisik sekunder pada remaja laki-laki adalah...", options: ["Pinggul membesar", "Tumbuh jakun dan suara membesar", "Mengalami menstruasi", "Kulit menjadi lebih halus"], answer: 1 },
+            { q: "Fase kehidupan manusia setelah masa remaja disebut fase...", options: ["Balita", "Anak-anak", "Dewasa", "Lansia"], answer: 2 },
+            { q: "Cahaya matahari penting untuk tumbuhan karena digunakan untuk...", options: ["Pernapasan", "Fotosintesis", "Penguapan", "Menyerap air"], answer: 1 },
+            { q: "Tumbuhan yang ditanam di tempat gelap akan tumbuh lebih cepat tinggi, pucat, dan batang lemah. Peristiwa ini disebut...", options: ["Etiolasi", "Gutasi", "Transpirasi", "Fototropisme"], answer: 0 },
+            { q: "Zat makanan yang paling penting untuk pembentukan sel-sel baru dan pertumbuhan tubuh adalah...", options: ["Karbohidrat", "Vitamin", "Protein", "Mineral"], answer: 2 },
+            { q: "Masuknya air ke dalam biji untuk mengaktifkan enzim dalam proses perkecambahan disebut...", options: ["Osmosis", "Difusi", "Imbibisi", "Transpor aktif"], answer: 2 },
+            { q: "Bagian dari embrio biji yang akan tumbuh menjadi akar adalah...", options: ["Plumula", "Radikula", "Kotiledon", "Epikotil"], answer: 1 },
+            { q: "Hormon tumbuhan yang berfungsi menunda penuaan daun dan merangsang pembelahan sel adalah...", options: ["Auksin", "Sitokinin", "Asam absisat", "Gas etilen"], answer: 1 },
+            { q: "Hormon yang berperan dalam proses pematangan buah adalah...", options: ["Giberelin", "Asam traumalin", "Gas etilen", "Antokalin"], answer: 2 },
+            { q: "Pada manusia, hormon tiroksin yang mempengaruhi metabolisme dan pertumbuhan dihasilkan oleh kelenjar...", options: ["Hipofisis", "Tiroid (gondok)", "Pankreas", "Adrenal"], answer: 1 },
+            { q: "Tahapan perkembangan katak setelah telur menetas adalah...", options: ["Katak berekor", "Berudu (kecebong)", "Katak muda", "Pupa"], answer: 1 },
+            { q: "Ciri ciri hewan pada fase pupa (kepompong) adalah...", options: ["Sangat aktif makan", "Tidak aktif (istirahat) untuk pembentukan organ", "Mulai bisa terbang", "Mencari pasangan"], answer: 1 },
+            { q: "Berikut ini ciri-ciri perubahan primer pada remaja perempuan saat pubertas adalah...", options: ["Payudara membesar", "Pinggul membesar", "Mengalami menstruasi perdana (menarche)", "Tumbuh rambut di ketiak"], answer: 2 },
+            { q: "Pertumbuhan sekunder (membesarnya batang) tidak terjadi pada tumbuhan monokotil (seperti jagung dan padi) karena...", options: ["Akarnya serabut", "Daunnya sejajar", "Tidak memiliki kambium", "Batangnya beruas-ruas"], answer: 2 },
+            { q: "Suhu yang paling baik untuk pertumbuhan dan perkembangan tanaman disebut suhu...", options: ["Maksimum", "Minimum", "Optimum", "Ekstrem"], answer: 2 },
+            { q: "Proses peluruhan kulit atau pergantian kerangka luar pada serangga yang sedang tumbuh disebut...", options: ["Ekdisis", "Regenerasi", "Adaptasi", "Mutasi"], answer: 0 },
+            { q: "Biji kacang hijau yang disimpan dalam botol tertutup tanpa air tidak akan berkecambah karena...", options: ["Kekurangan cahaya", "Kekurangan oksigen dan air", "Kelebihan karbon dioksida", "Suhu terlalu dingin"], answer: 1 },
+            { q: "Menurunnya fungsi organ-organ tubuh secara alamiah terjadi pada masa...", options: ["Dewasa awal", "Dewasa madya", "Lanjut usia (Lansia)", "Pubertas"], answer: 2 },
+            { q: "Pernyataan yang tepat tentang hubungan gen dan pertumbuhan adalah...", options: ["Gen menentukan ukuran maksimal yang dapat dicapai suatu makhluk hidup", "Gen tidak berpengaruh pada hewan, hanya pada manusia", "Pengaruh gen bisa diubah dengan hormon", "Gen hanya bekerja saat masa bayi"], answer: 0 }
+        ];
+
+        // 2. Menjodohkan (5 Pasang)
+        const quizMatch = [
+            { id: "m1", left: "Auksin", right: "Hormon pemanjangan sel di ujung batang" },
+            { id: "m2", left: "Epigeal", right: "Perkecambahan dengan kotiledon ke atas tanah" },
+            { id: "m3", left: "Imago", right: "Fase dewasa pada serangga" },
+            { id: "m4", left: "Kambium", right: "Jaringan penyebab pertumbuhan sekunder" },
+            { id: "m5", left: "Etiolasi", right: "Pertumbuhan cepat di tempat gelap (pucat)" }
+        ];
+
+        // 3. Isian Singkat (2 Soal)
+        const quizShort = [
+            { q: "Proses bertambahnya ukuran, volume, dan massa yang bersifat irreversible disebut...", answer: ["pertumbuhan"] }, // array untuk multiple valid answers if needed
+            { q: "Metamorfosis yang tidak melalui tahap pupa (kepompong) disebut metamorfosis...", answer: ["tidak sempurna", "hemimetabola"] }
+        ];
+
+        // 4. PG Kompleks (3 Soal - Lebih dari 1 jawaban benar)
+        const quizComplex = [
+            { 
+                q: "Manakah dari pernyataan berikut yang merupakan ciri dari pertumbuhan? (Pilih semua yang benar)", 
+                options: ["Bersifat kuantitatif", "Bersifat kualitatif", "Dapat diukur (misal dengan meteran/timbangan)", "Bersifat irreversible (tidak bisa balik)"], 
+                answers: [0, 2, 3] 
+            },
+            { 
+                q: "Berikut ini yang merupakan faktor eksternal (dari luar) yang mempengaruhi pertumbuhan tumbuhan adalah... (Pilih semua yang benar)", 
+                options: ["Air", "Gen", "Cahaya Matahari", "Hormon Auksin"], 
+                answers: [0, 2] 
+            },
+            { 
+                q: "Hewan apa sajakah yang mengalami metamorfosis sempurna (Holometabola)? (Pilih semua yang benar)", 
+                options: ["Lalat", "Belalang", "Kupu-kupu", "Kecoa"], 
+                answers: [0, 2] 
+            }
+        ];
+
+        // --- STATE MANAGEMENT ---
+        let userAnswers = {};
+        let currentQuestionIndex = 0;
+        let totalQuestions = quizPG.length + 1 + quizShort.length + quizComplex.length; // 1 for match section
+        let matchState = { selectedLeft: null, selectedRight: null, pairs: [], matchedLines: [] };
+        
+        // --- FUNGSI NAVIGASI MENU UTAMA ---
+        function showSection(sectionId) {
+            // Update buttons
+            document.querySelectorAll('.menu-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-green-600', 'text-white', 'border-green-500');
+                btn.classList.add('bg-white', 'text-green-800', 'border-green-200');
+            });
+            let activeBtn = document.getElementById(`btn-${sectionId}`);
+            activeBtn.classList.remove('bg-white', 'text-green-800', 'border-green-200', 'hover:bg-green-50');
+            activeBtn.classList.add('active', 'bg-green-600', 'text-white', 'border-green-500', 'hover:bg-green-800');
+
+            // Show content
+            document.querySelectorAll('.content-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            document.getElementById(sectionId).classList.add('active');
+
+            // Reset quiz if navigating away from it
+            if(sectionId !== 'kuis') {
+                resetQuizUI();
+            }
+        }
+
+        // --- FUNGSI NAVIGASI MATERI ---
+        let currentMateriIndex = 1;
+        const totalMateri = 5;
+
+        function showMateriPage(pageId) {
+            // Update sidebar nav
+            document.querySelectorAll('.materi-nav-btn').forEach(btn => {
+                btn.classList.remove('bg-green-100', 'text-green-800');
+                btn.classList.add('hover:bg-gray-100', 'text-gray-600');
+            });
+            // find button that calls this pageId
+            const btn = Array.from(document.querySelectorAll('.materi-nav-btn')).find(b => b.getAttribute('onclick').includes(pageId));
+            if(btn) {
+                btn.classList.remove('hover:bg-gray-100', 'text-gray-600');
+                btn.classList.add('bg-green-100', 'text-green-800');
+            }
+
+            // Show page
+            document.querySelectorAll('.materi-page').forEach(page => page.classList.add('hidden'));
+            document.getElementById(pageId).classList.remove('hidden');
+
+            // Update index and buttons
+            currentMateriIndex = parseInt(pageId.split('-')[1]);
+            updateMateriNavButtons();
+        }
+
+        function navMateri(direction) {
+            let nextIndex = currentMateriIndex + direction;
+            if(nextIndex >= 1 && nextIndex <= totalMateri) {
+                showMateriPage(`materi-${nextIndex}`);
+            }
+        }
+
+        function updateMateriNavButtons() {
+            const btnPrev = document.getElementById('btn-materi-prev');
+            const btnNext = document.getElementById('btn-materi-next');
+            
+            if (currentMateriIndex === 1) {
+                btnPrev.classList.add('invisible');
+            } else {
+                btnPrev.classList.remove('invisible');
+            }
+
+            if (currentMateriIndex === totalMateri) {
+                btnNext.classList.add('hidden');
+                // Could add a button to go to Rangkuman here
+            } else {
+                btnNext.classList.remove('hidden');
+            }
+        }
+
+
+        // --- FUNGSI KUIS ---
+        
+        function resetQuizUI() {
+            document.getElementById('quiz-home').classList.remove('hidden');
+            document.getElementById('quiz-area').classList.add('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-review').classList.add('hidden');
+        }
+
+        function startQuiz() {
+            userAnswers = {};
+            currentQuestionIndex = 0;
+            
+            // Setup Match Quiz State
+            let shuffledRight = [...quizMatch].sort(() => Math.random() - 0.5);
+            matchState = { 
+                selectedLeft: null, 
+                selectedRight: null, 
+                pairs: [], 
+                matchedLines: [],
+                rightItems: shuffledRight
+            };
+
+            document.getElementById('quiz-home').classList.add('hidden');
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-review').classList.add('hidden');
+            document.getElementById('quiz-area').classList.remove('hidden');
+            
+            document.getElementById('total-questions-num').innerText = totalQuestions;
+            
+            renderQuestion();
+        }
+
+        function renderQuestion() {
+            const container = document.getElementById('question-container');
+            const titleEl = document.getElementById('quiz-type-title');
+            const numEl = document.getElementById('current-question-num');
+            const progressEl = document.getElementById('quiz-progress');
+            
+            container.innerHTML = '';
+            
+            // Calculate progress
+            const progressPercent = ((currentQuestionIndex) / totalQuestions) * 100;
+            progressEl.style.width = `${progressPercent}%`;
+            numEl.innerText = currentQuestionIndex + 1;
+
+            // Logic to determine which question to show
+            if (currentQuestionIndex < quizPG.length) {
+                // RENDER PILIHAN GANDA
+                titleEl.innerText = "Bagian 1: Pilihan Ganda";
+                renderPG(container, currentQuestionIndex);
+            } 
+            else if (currentQuestionIndex === quizPG.length) {
+                // RENDER MENJODOHKAN (Treated as 1 page)
+                titleEl.innerText = "Bagian 2: Menjodohkan";
+                renderMatch(container);
+            }
+            else if (currentQuestionIndex > quizPG.length && currentQuestionIndex <= quizPG.length + quizShort.length) {
+                // RENDER ISIAN SINGKAT
+                titleEl.innerText = "Bagian 3: Isian Singkat";
+                let shortIdx = currentQuestionIndex - quizPG.length - 1;
+                renderShort(container, shortIdx);
+            }
+            else {
+                // RENDER PG KOMPLEKS
+                titleEl.innerText = "Bagian 4: Pilihan Ganda Kompleks (Jawaban > 1)";
+                let compIdx = currentQuestionIndex - quizPG.length - 1 - quizShort.length;
+                renderComplex(container, compIdx);
+            }
+
+            updateQuizNavButtons();
+        }
+
+        function renderPG(container, idx) {
+            const qData = quizPG[idx];
+            const savedAns = userAnswers[`pg_${idx}`];
+            
+            let html = `
+                <div class="mb-4">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-4">${idx + 1}. ${qData.q}</h4>
+                    <div class="space-y-3">
+            `;
+            
+            qData.options.forEach((opt, optIdx) => {
+                const isChecked = savedAns === optIdx ? 'checked' : '';
+                const bgClass = isChecked ? 'bg-green-50 border-green-500' : 'bg-gray-50 border-gray-200 hover:bg-gray-100';
+                
+                html += `
+                    <label class="flex items-center p-4 border rounded-lg cursor-pointer transition-colors ${bgClass}" onclick="selectPG(${idx}, ${optIdx}, this)">
+                        <input type="radio" name="pg_${idx}" value="${optIdx}" class="hidden" ${isChecked}>
+                        <div class="w-6 h-6 rounded-full border-2 border-gray-300 flex-shrink-0 mr-4 flex items-center justify-center pointer-events-none custom-radio ${isChecked ? 'border-green-600' : ''}">
+                            ${isChecked ? '<div class="w-3 h-3 bg-green-600 rounded-full"></div>' : ''}
+                        </div>
+                        <span class="text-gray-700 pointer-events-none">${opt}</span>
+                    </label>
+                `;
+            });
+            
+            html += `</div></div>`;
+            container.innerHTML = html;
+        }
+
+        function selectPG(qIdx, optIdx, labelElement) {
+            userAnswers[`pg_${qIdx}`] = optIdx;
+            
+            // Update UI styling
+            const parent = labelElement.parentElement;
+            parent.querySelectorAll('label').forEach(lbl => {
+                lbl.classList.remove('bg-green-50', 'border-green-500');
+                lbl.classList.add('bg-gray-50', 'border-gray-200');
+                const radio = lbl.querySelector('.custom-radio');
+                radio.classList.remove('border-green-600');
+                radio.innerHTML = '';
+            });
+            
+            labelElement.classList.remove('bg-gray-50', 'border-gray-200');
+            labelElement.classList.add('bg-green-50', 'border-green-500');
+            const radio = labelElement.querySelector('.custom-radio');
+            radio.classList.add('border-green-600');
+            radio.innerHTML = '<div class="w-3 h-3 bg-green-600 rounded-full"></div>';
+        }
+
+        function renderMatch(container) {
+            let html = `
+                <div class="mb-4">
+                    <p class="text-gray-600 mb-6 bg-blue-50 p-3 rounded text-sm"><i class="fas fa-info-circle mr-2"></i>Klik kotak di kiri, lalu klik pasangannya di kotak kanan.</p>
+                    <div class="flex justify-between relative" id="match-game-area">
+                        <!-- Left Column -->
+                        <div class="w-5/12 space-y-4 z-10">
+            `;
+            
+            quizMatch.forEach((item, idx) => {
+                let isMatched = matchState.pairs.find(p => p.left === idx);
+                let stateClass = isMatched ? 'matched' : (matchState.selectedLeft === idx ? 'selected' : 'border-gray-200');
+                let icon = isMatched ? '<i class="fas fa-check-circle text-green-500 absolute -right-2 -top-2 bg-white rounded-full"></i>' : '';
+                
+                html += `
+                    <div id="match-l-${idx}" class="match-item p-4 bg-white rounded-lg shadow-sm border-2 text-sm text-gray-700 relative text-center min-h-[60px] flex items-center justify-center ${stateClass}" onclick="selectMatch('left', ${idx})">
+                        ${item.left} ${icon}
+                    </div>
+                `;
+            });
+
+            html += `</div>
+                    <!-- SVG for lines (optional visual enhancement, simplified here using basic CSS states) -->
+                    <!-- Right Column -->
+                    <div class="w-5/12 space-y-4 z-10">`;
+
+            matchState.rightItems.forEach((item, idx) => {
+                // Find right index in original array
+                let origIdx = quizMatch.findIndex(q => q.id === item.id);
+                let isMatched = matchState.pairs.find(p => p.right === origIdx);
+                let stateClass = isMatched ? 'matched' : (matchState.selectedRight === origIdx ? 'selected' : 'border-gray-200');
+                
+                html += `
+                    <div id="match-r-${origIdx}" class="match-item p-4 bg-white rounded-lg shadow-sm border-2 text-sm text-gray-700 relative text-center min-h-[60px] flex items-center justify-center ${stateClass}" onclick="selectMatch('right', ${origIdx})">
+                        ${item.right}
+                    </div>
+                `;
+            });
+
+            html += `</div></div></div>`;
+            container.innerHTML = html;
+        }
+
+        function selectMatch(side, idx) {
+            // Check if already matched
+            if (side === 'left' && matchState.pairs.find(p => p.left === idx)) return;
+            if (side === 'right' && matchState.pairs.find(p => p.right === idx)) return;
+
+            // Select
+            if (side === 'left') {
+                if(matchState.selectedLeft === idx) matchState.selectedLeft = null; // deselect
+                else matchState.selectedLeft = idx;
+            } else {
+                 if(matchState.selectedRight === idx) matchState.selectedRight = null;
+                 else matchState.selectedRight = idx;
+            }
+
+            // Check if both selected
+            if (matchState.selectedLeft !== null && matchState.selectedRight !== null) {
+                // It's a match! (We just record pairs, correctness checked at the end)
+                matchState.pairs.push({
+                    left: matchState.selectedLeft,
+                    right: matchState.selectedRight
+                });
+                
+                // Save to userAnswers format for consistency
+                userAnswers['match'] = matchState.pairs;
+
+                // Reset selection
+                matchState.selectedLeft = null;
+                matchState.selectedRight = null;
+            }
+            
+            // Re-render specifically the match container
+            renderMatch(document.getElementById('question-container'));
+        }
+
+        function renderShort(container, idx) {
+            const qData = quizShort[idx];
+            const savedAns = userAnswers[`short_${idx}`] || '';
+            
+            let html = `
+                <div class="mb-4">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-6">${idx + 1}. ${qData.q}</h4>
+                    <input type="text" id="short-input-${idx}" value="${savedAns}" oninput="saveShortAns(${idx}, this.value)" 
+                           class="w-full border-2 border-gray-300 rounded-lg p-4 text-gray-700 focus:outline-none focus:border-green-500 focus:ring-1 focus:ring-green-500 transition-colors"
+                           placeholder="Ketik jawabanmu disini..." autocomplete="off">
+                </div>
+            `;
+            container.innerHTML = html;
+        }
+
+        function saveShortAns(idx, val) {
+            userAnswers[`short_${idx}`] = val.trim();
+        }
+
+        function renderComplex(container, idx) {
+            const qData = quizComplex[idx];
+            // Get saved answers array or initialize empty
+            let savedAns = userAnswers[`comp_${idx}`] || []; 
+            
+            let html = `
+                <div class="mb-4">
+                    <h4 class="text-lg font-semibold text-gray-800 mb-2">${idx + 1}. ${qData.q}</h4>
+                    <p class="text-sm text-red-500 mb-4 font-medium">*Pilih semua jawaban yang menurutmu benar</p>
+                    <div class="space-y-3">
+            `;
+            
+            qData.options.forEach((opt, optIdx) => {
+                const isChecked = savedAns.includes(optIdx);
+                const bgClass = isChecked ? 'bg-blue-50 border-blue-500' : 'bg-gray-50 border-gray-200 hover:bg-gray-100';
+                
+                html += `
+                    <label class="flex items-center p-4 border rounded-lg cursor-pointer transition-colors ${bgClass}" onclick="toggleComplex(${idx}, ${optIdx}, this)">
+                        <input type="checkbox" class="hidden" ${isChecked ? 'checked' : ''}>
+                        <div class="w-6 h-6 rounded flex-shrink-0 mr-4 border-2 flex items-center justify-center custom-check ${isChecked ? 'bg-blue-600 border-blue-600' : 'border-gray-300'} pointer-events-none">
+                            ${isChecked ? '<i class="fas fa-check text-white text-xs"></i>' : ''}
+                        </div>
+                        <span class="text-gray-700 pointer-events-none">${opt}</span>
+                    </label>
+                `;
+            });
+            
+            html += `</div></div>`;
+            container.innerHTML = html;
+        }
+
+        function toggleComplex(qIdx, optIdx, labelElement) {
+            let currentAns = userAnswers[`comp_${qIdx}`] || [];
+            const index = currentAns.indexOf(optIdx);
+            
+            if (index > -1) {
+                currentAns.splice(index, 1); // Remove
+            } else {
+                currentAns.push(optIdx); // Add
+            }
+            userAnswers[`comp_${qIdx}`] = currentAns;
+
+            // Update UI
+            const isChecked = currentAns.includes(optIdx);
+            const box = labelElement.querySelector('.custom-check');
+            
+            if(isChecked) {
+                labelElement.classList.remove('bg-gray-50', 'border-gray-200');
+                labelElement.classList.add('bg-blue-50', 'border-blue-500');
+                box.classList.remove('border-gray-300');
+                box.classList.add('bg-blue-600', 'border-blue-600');
+                box.innerHTML = '<i class="fas fa-check text-white text-xs"></i>';
+            } else {
+                labelElement.classList.remove('bg-blue-50', 'border-blue-500');
+                labelElement.classList.add('bg-gray-50', 'border-gray-200');
+                box.classList.remove('bg-blue-600', 'border-blue-600');
+                box.classList.add('border-gray-300');
+                box.innerHTML = '';
+            }
+        }
+
+        function navQuiz(direction) {
+            let newIndex = currentQuestionIndex + direction;
+            if (newIndex >= 0 && newIndex < totalQuestions) {
+                currentQuestionIndex = newIndex;
+                renderQuestion();
+            }
+        }
+
+        function updateQuizNavButtons() {
+            const btnPrev = document.getElementById('btn-quiz-prev');
+            const btnNext = document.getElementById('btn-quiz-next');
+            const btnSubmit = document.getElementById('btn-quiz-submit');
+
+            btnPrev.disabled = currentQuestionIndex === 0;
+
+            if (currentQuestionIndex === totalQuestions - 1) {
+                btnNext.classList.add('hidden');
+                btnSubmit.classList.remove('hidden');
+            } else {
+                btnNext.classList.remove('hidden');
+                btnSubmit.classList.add('hidden');
+            }
+        }
+
+        function finishQuiz() {
+            // Confirm dialog replacement using custom modal or simple confirmation logic
+            // Since alert/confirm are banned, we proceed directly (or could build a modal)
+            calculateScore();
+        }
+
+        let evaluationData = { score: 0, correct: 0, wrong: 0, details: [] };
+
+        function calculateScore() {
+            let correctCount = 0;
+            let totalPoints = quizPG.length + quizMatch.length + quizShort.length + quizComplex.length;
+            evaluationData.details = [];
+
+            // 1. Evaluate PG (30)
+            quizPG.forEach((q, idx) => {
+                let uAns = userAnswers[`pg_${idx}`];
+                let isCorrect = uAns === q.answer;
+                if(isCorrect) correctCount++;
+                evaluationData.details.push({
+                    type: 'pg', num: idx + 1, q: q.q, correct: isCorrect, 
+                    userAnsText: uAns !== undefined ? q.options[uAns] : 'Tidak dijawab',
+                    correctAnsText: q.options[q.answer]
+                });
+            });
+
+            // 2. Evaluate Match (1 question block, but counts as 5 points)
+            let matchPairs = userAnswers['match'] || [];
+            let matchScore = 0;
+            quizMatch.forEach((q, idx) => {
+                // Find if user matched this left side (idx) with correct right side (idx)
+                let userPair = matchPairs.find(p => p.left === idx);
+                let isCorrect = userPair && userPair.right === idx;
+                if(isCorrect) {
+                    matchScore++;
+                    correctCount++;
+                }
+            });
+            evaluationData.details.push({
+                type: 'match', num: 'Menjodohkan', q: 'Pasangkan konsep dengan artinya',
+                correct: matchScore === 5,
+                scoreInfo: `${matchScore} / 5 Benar`
+            });
+
+            // 3. Evaluate Short (2)
+            quizShort.forEach((q, idx) => {
+                let uAns = (userAnswers[`short_${idx}`] || '').toLowerCase();
+                let isCorrect = q.answer.some(a => a.toLowerCase() === uAns);
+                if(isCorrect) correctCount++;
+                evaluationData.details.push({
+                    type: 'short', num: quizPG.length + 1 + idx, q: q.q, correct: isCorrect,
+                    userAnsText: uAns || 'Tidak dijawab', correctAnsText: q.answer[0]
+                });
+            });
+
+            // 4. Evaluate Complex (3)
+            quizComplex.forEach((q, idx) => {
+                let uAns = userAnswers[`comp_${idx}`] || [];
+                // Sort both arrays to compare
+                let uAnsSorted = [...uAns].sort();
+                let correctSorted = [...q.answers].sort();
+                
+                let isCorrect = uAnsSorted.length === correctSorted.length && 
+                                uAnsSorted.every((val, index) => val === correctSorted[index]);
+                
+                if(isCorrect) correctCount++;
+                
+                let uAnsTextArr = uAns.map(i => q.options[i]);
+                let cAnsTextArr = q.answers.map(i => q.options[i]);
+
+                evaluationData.details.push({
+                    type: 'complex', num: quizPG.length + 1 + quizShort.length + idx, q: q.q, correct: isCorrect,
+                    userAnsText: uAnsTextArr.length > 0 ? uAnsTextArr.join('<br>') : 'Tidak dijawab', 
+                    correctAnsText: cAnsTextArr.join('<br>')
+                });
+            });
+
+            // Calculate final 0-100 score
+            let finalScore = Math.round((correctCount / totalPoints) * 100);
+            evaluationData.score = finalScore;
+            evaluationData.correct = correctCount;
+            evaluationData.wrong = totalPoints - correctCount;
+
+            showResults();
+        }
+
+        function showResults() {
+            document.getElementById('quiz-area').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+            
+            document.getElementById('score-display').innerText = evaluationData.score;
+            document.getElementById('correct-display').innerText = evaluationData.correct;
+            document.getElementById('wrong-display').innerText = evaluationData.wrong;
+
+            // Change color based on score
+            const scoreEl = document.getElementById('score-display');
+            if(evaluationData.score >= 80) scoreEl.className = "text-6xl font-black text-green-600 mb-2";
+            else if(evaluationData.score >= 60) scoreEl.className = "text-6xl font-black text-yellow-500 mb-2";
+            else scoreEl.className = "text-6xl font-black text-red-500 mb-2";
+        }
+
+        function resetQuiz() {
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-home').classList.remove('hidden');
+        }
+
+        function reviewQuiz() {
+            document.getElementById('quiz-result').classList.add('hidden');
+            document.getElementById('quiz-review').classList.remove('hidden');
+            
+            const container = document.getElementById('review-container');
+            let html = '';
+
+            evaluationData.details.forEach(item => {
+                const statusColor = item.correct ? 'bg-green-100 text-green-800 border-green-200' : 'bg-red-100 text-red-800 border-red-200';
+                const icon = item.correct ? '<i class="fas fa-check text-green-600 mr-2"></i>' : '<i class="fas fa-times text-red-600 mr-2"></i>';
+                
+                html += `
+                    <div class="border rounded-lg p-4 mb-4 bg-gray-50">
+                        <div class="flex justify-between items-start mb-2">
+                            <h5 class="font-bold text-gray-800 text-sm w-5/6">${item.num}. ${item.q}</h5>
+                            <span class="text-xs font-bold px-2 py-1 rounded border ${statusColor}">${item.correct ? 'BENAR' : 'SALAH'}</span>
+                        </div>
+                `;
+
+                if(item.type === 'match') {
+                    html += `<p class="text-sm text-gray-700">Hasil: ${item.scoreInfo}</p>`;
+                } else {
+                    html += `
+                        <div class="text-sm mt-3 bg-white p-3 rounded border">
+                            <p class="text-gray-500 mb-1">Jawabanmu:</p>
+                            <div class="${item.correct ? 'text-green-700' : 'text-red-600'} font-medium mb-3">${icon} ${item.userAnsText}</div>
+                            
+                            ${!item.correct ? `
+                                <p class="text-gray-500 mb-1 border-t pt-2 mt-2">Jawaban Benar:</p>
+                                <div class="text-green-700 font-medium"><i class="fas fa-check-circle text-green-600 mr-2"></i> ${item.correctAnsText}</div>
+                            ` : ''}
+                        </div>
+                    `;
+                }
+                html += `</div>`;
+            });
+
+            container.innerHTML = html;
+        }
+
+        function closeReview() {
+            document.getElementById('quiz-review').classList.add('hidden');
+            document.getElementById('quiz-result').classList.remove('hidden');
+        }
+
+        // Initialize first section on load
+        window.onload = function() {
+            showSection('tujuan');
+            updateMateriNavButtons();
+        };
+
+    </script>
+</body>
+</html>
